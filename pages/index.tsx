@@ -71,7 +71,7 @@ export default function Home(){
         </div>
       </section>
 
-      <section id="features" className="relative mx-auto max-w-7xl px-6 py-24 scroll-mt-32">
+      <section id="features"  className="relative mx-auto max-w-7xl px-6 py-24 scroll-mt-8 md:scroll-mt-32">
         <ScrollAnimation>
           <div className="space-y-4 text-center">
             <p className="text-sm uppercase tracking-[0.32em] text-sky-300">Built for Transmission Line Engineers</p>
@@ -127,7 +127,7 @@ export default function Home(){
         </ScrollAnimation>
       </section>
 
-      <section id="configurations" className="mx-auto max-w-7xl px-6 py-24 scroll-mt-32">
+      <section id="configurations" className="relative mx-auto max-w-7xl px-6 py-24 scroll-mt-8 md:scroll-mt-32">
         <ScrollAnimation>
           <div className="space-y-4 text-center">
             <span className="text-sm uppercase tracking-[0.32em] text-sky-300">Supported Transmission Configurations</span>
@@ -161,7 +161,7 @@ export default function Home(){
 
       <WorkflowSection />
 
-      <section id="showcase" className="mx-auto max-w-7xl px-6 py-24 scroll-mt-32">
+      <section id="showcase" className="relative mx-auto max-w-7xl px-6 py-24 scroll-mt-8 md:scroll-mt-32">
         <ScrollAnimation>
           <div className="space-y-4 text-center">
             <span className="text-sm uppercase tracking-[0.32em] text-sky-300">See EMFIS In Action</span>

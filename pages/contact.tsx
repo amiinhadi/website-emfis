@@ -8,7 +8,7 @@ export default function Contact(){
           <div className="space-y-4">
             <h1 className="text-4xl font-semibold tracking-tight text-white">Contact Us</h1>
             <p className="text-lg leading-8 text-slate-300">
-              Get in touch for a demo, licensing, or support.
+              Get in touch for a demo, licensing or support.
             </p>
           </div>
 
