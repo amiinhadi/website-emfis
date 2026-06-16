@@ -34,15 +34,20 @@ export default function Header() {
     const element = document.getElementById(targetId)
 
     if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      })
+  const y =
+    element.getBoundingClientRect().top +
+    window.pageYOffset -
+    96
 
-      window.history.pushState(null, '', href)
-      setMobileMenuOpen(false)
-    }
-  }
+  window.scrollTo({
+    top: y,
+    behavior: 'smooth'
+  })
+
+  window.history.pushState(null, '', href)
+  setMobileMenuOpen(false)
+}
+}
 
   return (
     <header
@@ -64,27 +69,35 @@ export default function Header() {
           />
         </Link>
 
-        <nav className="hidden md:flex items-center gap-6 text-slate-300">
+        <nav className="hidden md:flex items-center gap-2 text-slate-300 ml-auto mr-16">
           {navLinks.map((link) => (
             <Link
-              key={link.id}
-              href={link.href}
-              onClick={(e) => handleSmoothScroll(e, link.href)}
-              className={`transition ${
-                activeSection === link.id
-                  ? 'text-white'
-                  : 'hover:text-white'
-              }`}
-            >
-              {link.label}
-            </Link>
+  key={link.id}
+  href={link.href}
+  onClick={(e) => handleSmoothScroll(e, link.href)}
+  className={`relative px-4 py-2 transition-all duration-300 group ${
+    activeSection === link.id
+      ? 'text-white font-medium'
+      : 'hover:text-white'
+  }`}
+>
+  {link.label}
+
+  <span
+  className={`absolute bottom-0 left-4 right-4 h-0.5 bg-gradient-to-r from-sky-400 to-blue-500 transition-all duration-300 ${
+    activeSection === link.id
+      ? 'opacity-100 scale-x-100'
+      : 'opacity-0 scale-x-0 origin-center group-hover:opacity-100 group-hover:scale-x-100'
+  }`}
+/>
+</Link>
           ))}
         </nav>
 
         <div className="flex items-center gap-4">
           <Link
             href="/contact"
-            className="hidden md:inline-flex min-h-[52px] items-center justify-center rounded-full bg-gradient-to-r from-sky-500 to-blue-500 px-6 py-3 text-sm font-semibold text-white"
+            className="hidden md:inline-flex min-h-[52px] items-center justify-center rounded-full bg-gradient-to-r from-sky-500 to-blue-500 px-6 py-3 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(56,139,253,0.45)]"
           >
             Request Demo
           </Link>
@@ -100,7 +113,7 @@ export default function Header() {
 
       {mobileMenuOpen && (
         <div className="md:hidden fixed top-[96px] left-0 right-0 bg-slate-950 border-t border-white/10 z-50">
-          <div className="flex flex-col px-6 py-6">
+          <div className="flex flex-col px-6 py-4">
             {navLinks.map((link) => (
               <Link
                 key={link.id}

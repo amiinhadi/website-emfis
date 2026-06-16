@@ -42,6 +42,8 @@ export default function WorkflowSection() {
   const [isVisible, setIsVisible] = useState(false)
   const [activeStep, setActiveStep] = useState(-1)
   const sectionRef = useRef<HTMLDivElement>(null)
+  const [mobileActiveStep, setMobileActiveStep] = useState(0)
+  const stepRefs = useRef<Array<HTMLDivElement | null>>([])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -59,8 +61,38 @@ export default function WorkflowSection() {
 
     return () => observer.disconnect()
   }, [])
+  
+useEffect(() => {
+  const handleScroll = () => {
+    let currentStep = -1
+
+    stepRefs.current.forEach((step, index) => {
+      if (!step) return
+
+      const rect = step.getBoundingClientRect()
+
+      if (
+        rect.top < window.innerHeight * 0.55 &&
+        rect.bottom > window.innerHeight * 0.35
+      ) {
+        currentStep = index
+      }
+    })
+
+    setMobileActiveStep(currentStep)
+  }
+
+  window.addEventListener('scroll', handleScroll)
+
+  handleScroll()
+
+  return () => {
+    window.removeEventListener('scroll', handleScroll)
+  }
+}, [])
 
   return (
+
     <section
       id="workflow"
       ref={sectionRef}
@@ -181,9 +213,12 @@ export default function WorkflowSection() {
       {/* Mobile Vertical Timeline */}
       <div className="md:hidden space-y-4">
         {steps.map((step, idx) => (
-          <div
-            key={idx}
-            className={`transition-all duration-300 ${
+         <div
+  key={idx}
+  ref={(el) => {
+    stepRefs.current[idx] = el
+  }}
+  className={`transition-all duration-300 ${
               isVisible
                 ? 'opacity-100 translate-x-0'
                 : 'opacity-0 -translate-x-8'
@@ -192,7 +227,21 @@ export default function WorkflowSection() {
               transitionDelay: isVisible ? `${idx * 100}ms` : '0ms'
             }}
           >
-            <div className={`${cardBaseClasses} border-white/10 hover:border-sky-400/20`}>
+          <div
+  className={`${cardBaseClasses} transition-all duration-500 ${
+    mobileActiveStep === idx
+      ? 'border-sky-400/40 bg-slate-950/90 scale-[1.03]'
+      : 'border-white/10 scale-100'
+  }`}
+  style={
+    mobileActiveStep === idx
+      ? {
+          boxShadow:
+            '0 0 35px rgba(56,139,253,0.25), inset 0 0 20px rgba(56,139,253,0.08)'
+        }
+      : {}
+  }
+>
               {/* Glow effect */}
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-50 transition-opacity duration-300"
@@ -203,16 +252,35 @@ export default function WorkflowSection() {
               />
 
               <div className="relative z-10 flex h-full w-full flex-col items-center justify-center text-center gap-3">
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-sky-500/10 font-semibold text-sm text-sky-400 group-hover:bg-sky-500/20 transition-colors duration-300">
+                <div
+  className={`inline-flex h-12 w-12 items-center justify-center rounded-full font-semibold text-sm transition-all duration-300 ${
+    mobileActiveStep === idx
+      ? 'bg-sky-500/40 text-sky-200'
+      : 'bg-sky-500/10 text-sky-400'
+  }`}
+  style={
+    mobileActiveStep === idx
+      ? {
+          boxShadow: '0 0 20px rgba(56,139,253,0.5)'
+        }
+      : {}
+  }
+>
                   {step.number}
                 </div>
                 <div className="space-y-2">
                   <h3 className="text-base font-semibold text-white">
                     {step.title}
                   </h3>
-                  <p className="text-sm text-slate-300 leading-relaxed max-w-[220px] mx-auto opacity-0 max-h-0 overflow-hidden transition-all duration-300">
-                    {step.description}
-                  </p>
+                  <p
+  className={`text-sm text-slate-300 leading-relaxed max-w-[220px] mx-auto overflow-hidden transition-all duration-500 ${
+    mobileActiveStep === idx
+      ? 'max-h-32 opacity-100 mt-3'
+      : 'max-h-0 opacity-0'
+  }`}
+>
+  {step.description}
+</p>
                 </div>
               </div>
             </div>

@@ -33,7 +33,7 @@ export default function Footer(){
         </div>
 
         <div className="mt-8 flex flex-col gap-3 text-sm text-slate-500 md:flex-row md:items-center md:justify-between">
-          <span>© 2026 Solvex Integrated Solutions</span>
+          <span>© 2026 EMFIS. All rights reserved.</span>
           <span>Designed for Power System Engineers</span>
         </div>
       </div>

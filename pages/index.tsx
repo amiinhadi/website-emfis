@@ -9,7 +9,7 @@ export default function Home(){
     <Layout>
       <section className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(56,139,253,0.16),_transparent_24%),radial-gradient(circle_at_bottom_right,_rgba(99,150,255,0.1),_transparent_32%),linear-gradient(180deg,_#031027_0%,_#020612_100%)]">
         <div className="absolute inset-0 bg-[linear-gradient(130deg,_rgba(56,139,253,0.12)_0%,_transparent_50%),linear-gradient(225deg,_rgba(56,139,253,0.08)_0%,_transparent_40%)]" />
-        <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-6 py-10">
+        <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-start px-6 pt-8 pb-10">
           <div className="grid gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
             <div className="space-y-8 max-w-2xl">
               <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm uppercase tracking-[0.32em] text-sky-300 backdrop-blur-sm">
@@ -71,7 +71,7 @@ export default function Home(){
         </div>
       </section>
 
-      <section id="features" className="relative mx-auto max-w-7xl px-6 py-24">
+      <section id="features" className="relative mx-auto max-w-7xl px-6 py-24 scroll-mt-32">
         <ScrollAnimation>
           <div className="space-y-4 text-center">
             <p className="text-sm uppercase tracking-[0.32em] text-sky-300">Built for Transmission Line Engineers</p>
@@ -127,7 +127,7 @@ export default function Home(){
         </ScrollAnimation>
       </section>
 
-      <section id="configurations" className="mx-auto max-w-7xl px-6 py-24">
+      <section id="configurations" className="mx-auto max-w-7xl px-6 py-24 scroll-mt-32">
         <ScrollAnimation>
           <div className="space-y-4 text-center">
             <span className="text-sm uppercase tracking-[0.32em] text-sky-300">Supported Transmission Configurations</span>
@@ -161,7 +161,7 @@ export default function Home(){
 
       <WorkflowSection />
 
-      <section id="showcase" className="mx-auto max-w-7xl px-6 py-24">
+      <section id="showcase" className="mx-auto max-w-7xl px-6 py-24 scroll-mt-32">
         <ScrollAnimation>
           <div className="space-y-4 text-center">
             <span className="text-sm uppercase tracking-[0.32em] text-sky-300">See EMFIS In Action</span>
@@ -195,7 +195,7 @@ export default function Home(){
         </ScrollAnimation>
       </section>
 
-      <section id="why" className="mx-auto max-w-7xl px-6 py-24">
+      <section id="why" className="mx-auto max-w-7xl px-6 py-24 scroll-mt-32">
         <ScrollAnimation>
           <div className="space-y-4 text-center">
             <span className="text-sm uppercase tracking-[0.32em] text-sky-300">Why EMFIS</span>
@@ -222,7 +222,7 @@ export default function Home(){
         </ScrollAnimation>
       </section>
 
-      <section id="contact" className="mx-auto max-w-7xl px-6 py-24">
+      <section id="contact" className="mx-auto max-w-7xl px-6 py-24 scroll-mt-32">
         <ScrollAnimation>
           <div className="rounded-[36px] border border-white/10 bg-gradient-to-r from-slate-950/95 to-slate-900/95 p-10 shadow-[0_40px_120px_rgba(0,0,0,0.22)]">
             <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-center">
