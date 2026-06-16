@@ -54,7 +54,7 @@ export default function Home(){
 
                   <div className="overflow-hidden rounded-[24px] border border-slate-700/70 bg-slate-950 shadow-inner">
                     <Image
-                      src="/User Interface.png"
+                      src="/user-interface.png"
                       alt="EMFIS user interface preview"
                       width={1100}
                       height={800}
