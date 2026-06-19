@@ -1,13 +1,27 @@
 import Layout from '../components/Layout'
 import Image from 'next/image'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import WorkflowSection from '../components/WorkflowSection'
 import ScrollAnimation from '../components/ScrollAnimation'
 
 export default function Home(){
+  const [selectedTower, setSelectedTower] = useState('/user-interface.png')
+  const [isChanging, setIsChanging] = useState(false)
+  useEffect(() => {
+  const resetTower = () => {
+    setSelectedTower('/user-interface.png')
+  }
+
+  window.addEventListener('resetHome', resetTower)
+
+  return () => {
+    window.removeEventListener('resetHome', resetTower)
+  }
+}, [])
   return (
     <Layout>
-      <section className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(56,139,253,0.16),_transparent_24%),radial-gradient(circle_at_bottom_right,_rgba(99,150,255,0.1),_transparent_32%),linear-gradient(180deg,_#031027_0%,_#020612_100%)]">
+      <section className="relative min-h-screen overflow-hidden -mt-[16px] bg-[radial-gradient(circle_at_top_left,_rgba(56,139,253,0.16),_transparent_24%),radial-gradient(circle_at_bottom_right,_rgba(99,150,255,0.1),_transparent_32%),linear-gradient(180deg,_#031027_0%,_#020612_100%)]">
         <div className="absolute inset-0 bg-[linear-gradient(130deg,_rgba(56,139,253,0.12)_0%,_transparent_50%),linear-gradient(225deg,_rgba(56,139,253,0.08)_0%,_transparent_40%)]" />
         <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-start px-6 pt-8 pb-10">
           <div className="grid gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
@@ -25,26 +39,97 @@ export default function Home(){
               </div>
 
               <div className="flex flex-wrap gap-4">
-                <Link href="/contact" className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-sky-500 to-blue-500 px-7 py-4 text-base font-semibold text-white shadow-[0_24px_80px_rgba(56,139,253,0.24)] transition duration-300 hover:-translate-y-0.5">
-                  Request Demo
+                <Link href="/contact"  
+                      className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-sky-500 to-blue-500 px-7 py-4 text-base font-semibold text-white shadow-[0_24px_80px_rgba(56,139,253,0.24)] transition duration-300 hover:-translate-y-0.5">
+                      Request Demo
                 </Link>
-                <Link href="#features" className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-7 py-4 text-base font-semibold text-white transition duration-300 hover:bg-white/10">
-                  Learn More
-                </Link>
+                <button
+                      onClick={() => {
+                  const element = document.getElementById('features')
+
+                if (element) {
+                  const y = element.getBoundingClientRect().top + window.pageYOffset -
+                  80
+
+                        window.scrollTo({
+                        top: y,
+                        behavior: 'smooth'
+                      })
+                  }
+           }}
+                  className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-7 py-4 text-base font-semibold text-white transition duration-300 hover:bg-white/10">
+                    Learn More
+              </button>
               </div>
 
               <div className="grid max-w-xl grid-cols-3 gap-3 rounded-3xl border border-white/10 bg-slate-950/70 p-4 text-center text-sm text-slate-300 shadow-[0_30px_90px_rgba(0,0,0,0.12)]">
-                <div className="rounded-2xl bg-white/5 py-3">132kV</div>
-                <div className="rounded-2xl bg-white/5 py-3">275kV</div>
-                <div className="rounded-2xl bg-white/5 py-3">Quadruple Circuit</div>
-              </div>
+              <button
+                  onClick={() => {
+                  setIsChanging(true)
+
+                  setTimeout(() => {
+                  setSelectedTower('/tower132.png')
+                  setIsChanging(false)
+                  }, 250)
+                }}
+                  className={`rounded-2xl py-3 transition ${
+                  selectedTower === '/tower132.png'
+                  ? 'bg-sky-500/20 text-white shadow-[0_0_25px_rgba(56,139,253,0.5)]'
+                  : 'bg-white/5 hover:bg-sky-500/20 hover:text-white hover:shadow-[0_0_25px_rgba(56,139,253,0.5)]'
+                }`}
+                >
+                132kV     
+              </button>
+
+              <button
+                  onClick={() => {
+                  setIsChanging(true)
+
+                  setTimeout(() => {
+                  setSelectedTower('/tower275.png')
+                  setIsChanging(false)
+                  }, 250)
+                }}
+                  className={`rounded-2xl py-3 transition ${
+                  selectedTower === '/tower275.png'
+                  ? 'bg-sky-500/20 text-white shadow-[0_0_25px_rgba(56,139,253,0.5)]'
+                  : 'bg-white/5 hover:bg-sky-500/20 hover:text-white hover:shadow-[0_0_25px_rgba(56,139,253,0.5)]'
+                  }`}
+                  >
+                  275kV
+              </button>
+
+              <button
+                  onClick={() => {
+                  setIsChanging(true)
+
+                  setTimeout(() => {
+                  setSelectedTower('/towerquad.png')
+                  setIsChanging(false)
+                  }, 250)
+                }}
+                  className={`rounded-2xl py-3 transition ${
+                  selectedTower === '/towerquad.png'
+                  ? 'bg-sky-500/20 text-white shadow-[0_0_25px_rgba(56,139,253,0.5)]'
+                  : 'bg-white/5 hover:bg-sky-500/20 hover:text-white hover:shadow-[0_0_25px_rgba(56,139,253,0.5)]'
+                  }`}
+                  >
+                  Quadruple Circuit
+              </button>
+          </div>
             </div>
 
             <div className="relative flex items-center justify-center">
               <div className="absolute -right-10 top-16 h-40 w-40 rounded-full bg-sky-500/15 blur-3xl" />
-              <div className="absolute -left-8 bottom-10 h-32 w-32 rounded-full bg-cyan-400/10 blur-3xl" />
-              <div className="group relative mx-auto w-full max-w-[520px] rounded-[34px] border border-cyan-300/20 bg-slate-950/40 p-5 shadow-2xl shadow-cyan-950/30 transition-all duration-300 ease-out hover:scale-[1.04] hover:border-cyan-300/40 hover:shadow-cyan-500/20">
-                <div className="rounded-[28px] border border-slate-700/60 bg-[#050b1f] p-5">
+                <div className="absolute -left-8 bottom-10 h-32 w-32 rounded-full bg-cyan-400/10 blur-3xl" />
+                  <div className={`group relative mx-auto w-full max-w-[520px] rounded-[34px] border bg-slate-950/40 p-5 shadow-2xl transition-all duration-500 ease-out hover:scale-[1.04]
+                        ${
+                          isChanging
+                              ? 'border-sky-400/70 shadow-[0_0_60px_rgba(56,139,253,0.5)]'
+                              : 'border-cyan-300/20 shadow-cyan-950/30 hover:border-cyan-300/40 hover:shadow-cyan-500/20'
+                        }`}
+                  >
+                  <div className="rounded-[28px] border border-slate-700/60 bg-[#050b1f] p-5">
                   <div className="mb-4 flex items-center justify-between rounded-[22px] border border-slate-700/70 bg-slate-900/80 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
                     <span className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-200">EMFIS Terminal</span>
                     <span className="rounded-full bg-slate-800/90 px-4 py-1 text-[10px] font-semibold uppercase tracking-[0.4em] text-white">
@@ -54,12 +139,18 @@ export default function Home(){
 
                   <div className="overflow-hidden rounded-[24px] border border-slate-700/70 bg-slate-950 shadow-inner">
                     <Image
-                      src="/user-interface.png"
-                      alt="EMFIS user interface preview"
-                      width={1100}
-                      height={800}
-                      className="h-auto w-full object-contain transition-transform duration-300 ease-out group-hover:scale-[1.03]"
-                      priority
+                        key={selectedTower}
+                        src={selectedTower}
+                        alt="Transmission Tower"
+                        width={1100}
+                        height={800}
+                        className={`h-auto w-full object-contain transition-all duration-500 ease-out group-hover:scale-[1.03]
+                        ${
+                        isChanging
+                            ? 'opacity-0 blur-md scale-95'
+                            : 'opacity-100 blur-0 scale-100'
+                        }`}
+                        priority
                     />
                   </div>
                 </div>
@@ -71,7 +162,7 @@ export default function Home(){
         </div>
       </section>
 
-      <section id="features"  className="relative mx-auto max-w-7xl px-6 py-24 scroll-mt-8 md:scroll-mt-32">
+      <section id="features"  className="relative mx-auto max-w-7xl px-6 py-16 scroll-mt-16 md:scroll-mt-40">
         <ScrollAnimation>
           <div className="space-y-4 text-center">
             <p className="text-sm uppercase tracking-[0.32em] text-sky-300">Built for Transmission Line Engineers</p>
@@ -86,21 +177,21 @@ export default function Home(){
                 <span className="text-xl">⚡</span>
               </div>
               <h3 className="mt-6 text-xl font-semibold text-white">Electric Field Modeling</h3>
-              <p className="mt-3 text-slate-300 leading-7">High-voltage field modeling for conductor geometry, insulation planning, and clearance verification.</p>
+              <p className="mt-3 text-slate-300 leading-7">High-voltage field modeling for conductor geometry, insulation planning and clearance verification.</p>
             </div>
             <div className="glass-card group p-8 transition duration-300 hover:-translate-y-1 hover:border-cyan-400/20">
               <div className="flex h-14 w-14 items-center justify-center rounded-3xl bg-cyan-500/10 text-cyan-300 transition duration-300 group-hover:bg-cyan-500/15">
                 <span className="text-xl">🧲</span>
               </div>
               <h3 className="mt-6 text-xl font-semibold text-white">Magnetic Field Assessment</h3>
-              <p className="mt-3 text-slate-300 leading-7">Magnetic field evaluation for circuits, grounding, and nearby infrastructure impact.</p>
+              <p className="mt-3 text-slate-300 leading-7">Magnetic field evaluation for circuits, grounding and nearby infrastructure impact.</p>
             </div>
             <div className="glass-card group p-8 transition duration-300 hover:-translate-y-1 hover:border-sky-400/20">
               <div className="flex h-14 w-14 items-center justify-center rounded-3xl bg-sky-500/10 text-sky-300 transition duration-300 group-hover:bg-sky-500/15">
                 <span className="text-xl">132</span>
               </div>
               <h3 className="mt-6 text-xl font-semibold text-white">132kV System Modeling</h3>
-              <p className="mt-3 text-slate-300 leading-7">Dedicated support for 132kV transmission corridors, regional planning, and design verification.</p>
+              <p className="mt-3 text-slate-300 leading-7">Dedicated support for 132kV transmission corridors, regional planning and design verification.</p>
             </div>
             <div className="glass-card group p-8 transition duration-300 hover:-translate-y-1 hover:border-blue-400/20">
               <div className="flex h-14 w-14 items-center justify-center rounded-3xl bg-blue-500/10 text-blue-300 transition duration-300 group-hover:bg-blue-500/15">
@@ -121,13 +212,13 @@ export default function Home(){
                 <span className="text-xl">📝</span>
               </div>
               <h3 className="mt-6 text-xl font-semibold text-white">Technical Reporting</h3>
-              <p className="mt-3 text-slate-300 leading-7">Generate engineering-ready reports with field diagrams, results, and compliance notes.</p>
+              <p className="mt-3 text-slate-300 leading-7">Generate engineering-ready reports with field diagrams, results and compliance notes.</p>
             </div>
           </div>
         </ScrollAnimation>
       </section>
 
-      <section id="configurations" className="relative mx-auto max-w-7xl px-6 py-24 scroll-mt-8 md:scroll-mt-32">
+      <section id="configurations" className="relative mx-auto max-w-7xl px-6 py-16 scroll-mt-16 md:scroll-mt-40">
         <ScrollAnimation>
           <div className="space-y-4 text-center">
             <span className="text-sm uppercase tracking-[0.32em] text-sky-300">Supported Transmission Configurations</span>
@@ -161,7 +252,7 @@ export default function Home(){
 
       <WorkflowSection />
 
-      <section id="showcase" className="relative mx-auto max-w-7xl px-6 py-24 scroll-mt-8 md:scroll-mt-32">
+      <section id="showcase" className="relative mx-auto max-w-7xl px-6 py-16 scroll-mt-16 md:scroll-mt-40">
         <ScrollAnimation>
           <div className="space-y-4 text-center">
             <span className="text-sm uppercase tracking-[0.32em] text-sky-300">See EMFIS In Action</span>
@@ -222,7 +313,7 @@ export default function Home(){
         </ScrollAnimation>
       </section>
 
-      <section id="contact" className="mx-auto max-w-7xl px-6 py-24 scroll-mt-32">
+      <section id="contact" className="relative mx-auto max-w-7xl px-6 py-24 scroll-mt-32 md:scroll-mt-32">
         <ScrollAnimation>
           <div className="rounded-[36px] border border-white/10 bg-gradient-to-r from-slate-950/95 to-slate-900/95 p-10 shadow-[0_40px_120px_rgba(0,0,0,0.22)]">
             <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-center">

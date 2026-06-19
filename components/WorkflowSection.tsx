@@ -96,7 +96,7 @@ useEffect(() => {
     <section
       id="workflow"
       ref={sectionRef}
-      className="mx-auto max-w-7xl px-6 py-24"
+      className="relative mx-auto max-w-7xl px-6 py-24 scroll-mt-8 md:scroll-mt-8"
     >
       <div className="space-y-4 text-center mb-16">
         <span className="text-sm uppercase tracking-[0.32em] text-sky-300">

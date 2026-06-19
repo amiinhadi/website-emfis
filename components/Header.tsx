@@ -33,11 +33,21 @@ export default function Header() {
     const targetId = href.replace('/#', '')
     const element = document.getElementById(targetId)
 
-    if (element) {
+  if (element) {
+  const offsets = {
+    features: 80,
+    configurations: 120,
+    workflow: 86,
+    showcase: 96
+  }
+
+  const offset =
+    offsets[targetId as keyof typeof offsets] ?? 96
+
   const y =
     element.getBoundingClientRect().top +
     window.pageYOffset -
-    96
+    offset
 
   window.scrollTo({
     top: y,
@@ -57,9 +67,23 @@ export default function Header() {
           : 'bg-slate-950/40 border-b border-white/5'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 h-[96px] flex items-center justify-between">
-        <Link href="/">
-          <Image
+      <div className="max-w-7xl mx-auto px-6 h-[80px] flex items-center justify-between">
+        <Link
+            href="/"
+            onClick={(e) => {
+            if (pathname === '/') {
+            e.preventDefault()
+
+            window.dispatchEvent(new Event('resetHome'))
+
+            window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+            })
+          }
+          }}
+        >
+        <Image
             src="/Logo EMFIS.png"
             alt="EMFIS logo"
             width={160}
@@ -112,8 +136,8 @@ export default function Header() {
       </div>
 
       {mobileMenuOpen && (
-        <div className="md:hidden fixed top-[96px] left-0 right-0 bg-slate-950 border-t border-white/10 z-50">
-          <div className="flex flex-col px-6 py-4">
+        <div className="md:hidden fixed top-[80px] left-0 right-0 bg-slate-950 border-t border-white/10 z-50">
+          <div className="flex flex-col px-6 pt-0 pb-4">
             {navLinks.map((link) => (
               <Link
                 key={link.id}
