@@ -104,12 +104,12 @@ export default function Home(){
                   setIsChanging(true)
 
                   setTimeout(() => {
-                  setSelectedTower('/towerquad.png')
+                  setSelectedTower('/towerQuad.png')
                   setIsChanging(false)
                   }, 250)
                 }}
                   className={`rounded-2xl py-3 transition ${
-                  selectedTower === '/towerquad.png'
+                  selectedTower === '/towerQuad.png'
                   ? 'bg-sky-500/20 text-white shadow-[0_0_25px_rgba(56,139,253,0.5)]'
                   : 'bg-white/5 hover:bg-sky-500/20 hover:text-white hover:shadow-[0_0_25px_rgba(56,139,253,0.5)]'
                   }`}
