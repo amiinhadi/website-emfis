@@ -92,12 +92,12 @@ export default function WhyAndCTA() {
             transition={{ duration: 0.5 }}
             className="mx-auto flex max-w-3xl flex-col items-center space-y-5 text-center"
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-sky-400/30 bg-sky-500/15 px-3.5 py-1.5 shadow-[0_0_24px_rgba(56,189,248,0.25)]">
-              <span className="relative flex h-2 w-2">
+            <div className="inline-flex items-center gap-2 rounded-full border border-sky-400/20 bg-sky-500/10 px-3 py-1 shadow-[0_0_24px_rgba(56,189,248,0.15)] sm:gap-2.5 sm:px-4 sm:py-1.5">
+              <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75" />
                 <span className="relative inline-flex h-full w-full rounded-full bg-sky-400" />
               </span>
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-200">
+              <span className="whitespace-nowrap text-[10px] font-semibold uppercase tracking-[0.15em] text-sky-200 sm:text-xs sm:tracking-[0.25em]">
                 Why EMFIS
               </span>
             </div>
