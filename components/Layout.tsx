@@ -8,7 +8,7 @@ export default function Layout({ children }:{ children: ReactNode }){
     <div className="min-h-screen flex flex-col">
       <ScrollProgressBar />
       <Header />
-      <main className="flex-1 pt-[96px] w-full">{children}</main>
+      <main className="flex-1 w-full">{children}</main>
       <Footer />
     </div>
   )

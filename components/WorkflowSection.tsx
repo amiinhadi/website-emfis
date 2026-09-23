@@ -1,303 +1,405 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { motion } from 'framer-motion'
 
 const steps = [
   {
     number: '01',
     title: 'Select Configuration',
-    description: 'Choose the transmission system to be analyzed: 132kV, 275kV or Quadruple Circuit.'
+    description:
+      'Choose the transmission system to be analyzed: 132kV, 275kV or Quadruple Circuit.',
   },
   {
     number: '02',
     title: 'Define Geometry',
-    description: 'Configure tower geometry, conductor arrangement, phase spacing and line parameters.'
+    description:
+      'Configure tower geometry, conductor arrangement, phase spacing and line parameters.',
   },
   {
     number: '03',
     title: 'Run Simulation',
-    description: 'Execute electric field and magnetic field calculations using the EMFIS computation engine.'
+    description:
+      'Execute electric field and magnetic field calculations using the EMFIS computation engine.',
   },
   {
     number: '04',
     title: 'Visualize Results',
-    description: 'View field distribution, contour mapping and graphical analysis outputs.'
+    description:
+      'View field distribution, contour mapping and graphical analysis outputs.',
   },
   {
     number: '05',
     title: 'Engineering Assessment',
-    description: 'Review calculated results and identify critical electromagnetic field zones.'
+    description:
+      'Review calculated results and identify critical electromagnetic field zones.',
   },
   {
     number: '06',
     title: 'Generate Reports',
-    description: 'Export professional engineering reports with figures, calculations and project documentation.'
-  }
+    description:
+      'Export professional engineering reports with figures, calculations and project documentation.',
+  },
 ]
 
-const cardBaseClasses =
-  'glass-card group relative overflow-hidden rounded-2xl border transition-all duration-300 cursor-pointer h-[170px] p-5 flex flex-col items-center justify-center text-center gap-4'
-
 export default function WorkflowSection() {
-  const [isVisible, setIsVisible] = useState(false)
-  const [activeStep, setActiveStep] = useState(-1)
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const [mobileActiveStep, setMobileActiveStep] = useState(0)
-  const stepRefs = useRef<Array<HTMLDivElement | null>>([])
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-        }
-      },
-      { threshold: 0.1 }
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
-  
-useEffect(() => {
-  const handleScroll = () => {
-    let currentStep = -1
-
-    stepRefs.current.forEach((step, index) => {
-      if (!step) return
-
-      const rect = step.getBoundingClientRect()
-
-      if (
-        rect.top < window.innerHeight * 0.55 &&
-        rect.bottom > window.innerHeight * 0.35
-      ) {
-        currentStep = index
-      }
-    })
-
-    setMobileActiveStep(currentStep)
-  }
-
-  window.addEventListener('scroll', handleScroll)
-
-  handleScroll()
-
-  return () => {
-    window.removeEventListener('scroll', handleScroll)
-  }
-}, [])
-
   return (
-
     <section
       id="workflow"
-      ref={sectionRef}
-      className="relative mx-auto max-w-7xl px-6 py-24 scroll-mt-8 md:scroll-mt-8"
+      className="relative scroll-mt-20 overflow-hidden bg-[#0a0f1d] py-10 md:scroll-mt-20 md:py-16"
     >
-      <div className="space-y-4 text-center mb-16">
-        <span className="text-sm uppercase tracking-[0.32em] text-sky-300">
-          How EMFIS Works
-        </span>
-        <h2 className="text-4xl font-semibold tracking-tight text-white">
-          EMFIS Workflow
-        </h2>
-        <p className="text-lg text-slate-300 mt-4">
-          From transmission line setup to professional engineering reporting.
-        </p>
-      </div>
+      {/* CSS Animation Keyframes for Laser Flow */}
+      <style>{`
+        @keyframes laserFlow1 {
+          0% { transform: translateX(-100%); opacity: 0; }
+          15% { opacity: 1; }
+          40% { transform: translateX(100%); opacity: 1; }
+          45% { transform: translateX(100%); opacity: 0; }
+          100% { transform: translateX(100%); opacity: 0; }
+        }
+        @keyframes laserFlow2 {
+          0% { transform: translateX(-100%); opacity: 0; }
+          45% { transform: translateX(-100%); opacity: 0; }
+          60% { opacity: 1; }
+          85% { transform: translateX(100%); opacity: 1; }
+          90% { transform: translateX(100%); opacity: 0; }
+          100% { transform: translateX(100%); opacity: 0; }
+        }
+        .animate-laser-row1 {
+          animation: laserFlow1 4s linear infinite;
+        }
+        .animate-laser-row2 {
+          animation: laserFlow2 4s linear infinite;
+        }
+      `}</style>
 
-      {/* Desktop Horizontal Timeline */}
-      <div className="hidden md:block">
-        <div className="relative">
-          {/* Animated connector line */}
-          <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-gradient-to-r from-transparent via-sky-500/30 to-transparent">
-            <div
-              className={`h-full bg-gradient-to-r from-sky-400 to-blue-500 transition-all duration-1000 ${
-                isVisible ? 'w-full' : 'w-0'
-              }`}
-              style={{
-                boxShadow: '0 0 20px rgba(56, 139, 253, 0.6)'
+      {/* ==================== ELEGANT CORNER TECH BACKGROUNDS ==================== */}
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        {/* Ambient Center Glow */}
+        <div className="absolute left-1/2 top-1/2 h-[450px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-500/5 blur-[160px]" />
+
+        {/* Subtle Dot Grid */}
+        <div className="absolute inset-0 h-full w-full opacity-[0.04]">
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern
+                id="dot_grid_clean"
+                x="0"
+                y="0"
+                width="36"
+                height="36"
+                patternUnits="userSpaceOnUse"
+              >
+                <circle cx="2" cy="2" r="1.5" fill="#38bdf8" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#dot_grid_clean)" />
+          </svg>
+        </div>
+
+        {/* Subtle Engineering Circuit Pattern (behind cards) */}
+        <div
+          aria-hidden
+          className="absolute inset-0 hidden opacity-[0.09] md:block"
+        >
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern
+                id="eng_circuit_traces"
+                x="0"
+                y="0"
+                width="180"
+                height="180"
+                patternUnits="userSpaceOnUse"
+              >
+                <path
+                  d="M0 40 H60 V100 H120 V140 H180 M40 0 V40 M120 100 V180 M90 70 H150"
+                  fill="none"
+                  stroke="#38bdf8"
+                  strokeWidth="1"
+                />
+                <circle cx="60" cy="40" r="2" fill="#38bdf8" />
+                <circle cx="120" cy="100" r="2" fill="#38bdf8" />
+                <circle cx="90" cy="70" r="1.5" fill="#0ea5e9" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#eng_circuit_traces)" />
+          </svg>
+        </div>
+
+        {/* TOP-LEFT CORNER CIRCUIT */}
+        <svg
+          className="absolute hidden h-80 w-80 text-sky-400 opacity-[0.12] md:left-0 md:top-0 md:block"
+          viewBox="0 0 300 300"
+          fill="none"
+        >
+          <path
+            d="M0 40 H120 L160 80 V180 L220 240 H300"
+            stroke="currentColor"
+            strokeWidth="1.2"
+            strokeDasharray="4 4"
+          />
+          <path
+            d="M40 0 V90 L90 140 H200"
+            stroke="currentColor"
+            strokeWidth="1.2"
+          />
+          <circle cx="160" cy="80" r="3" fill="currentColor" />
+          <circle cx="90" cy="140" r="3" fill="currentColor" />
+          <circle
+            cx="220"
+            cy="240"
+            r="4"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            fill="none"
+          />
+        </svg>
+
+        {/* TOP-RIGHT CORNER CIRCUIT */}
+        <svg
+          className="absolute hidden h-80 w-80 scale-x-[-1] text-sky-400 opacity-[0.12] md:right-0 md:top-0 md:block"
+          viewBox="0 0 300 300"
+          fill="none"
+        >
+          <path
+            d="M0 40 H120 L160 80 V180 L220 240 H300"
+            stroke="currentColor"
+            strokeWidth="1.2"
+            strokeDasharray="4 4"
+          />
+          <path
+            d="M40 0 V90 L90 140 H200"
+            stroke="currentColor"
+            strokeWidth="1.2"
+          />
+          <circle cx="160" cy="80" r="3" fill="currentColor" />
+          <circle cx="90" cy="140" r="3" fill="currentColor" />
+        </svg>
+
+        {/* BOTTOM-LEFT CORNER CIRCUIT */}
+        <svg
+          className="absolute bottom-0 left-0 h-80 w-80 scale-y-[-1] text-sky-400 opacity-[0.12]"
+          viewBox="0 0 300 300"
+          fill="none"
+        >
+          <path
+            d="M0 40 H120 L160 80 V180 L220 240 H300"
+            stroke="currentColor"
+            strokeWidth="1.2"
+            strokeDasharray="4 4"
+          />
+          <path
+            d="M40 0 V90 L90 140 H200"
+            stroke="currentColor"
+            strokeWidth="1.2"
+          />
+          <circle cx="160" cy="80" r="3" fill="currentColor" />
+        </svg>
+
+        {/* BOTTOM-RIGHT CORNER CIRCUIT */}
+        <svg
+          className="absolute bottom-0 right-0 h-80 w-80 scale-x-[-1] scale-y-[-1] text-sky-400 opacity-[0.12]"
+          viewBox="0 0 300 300"
+          fill="none"
+        >
+          <path
+            d="M0 40 H120 L160 80 V180 L220 240 H300"
+            stroke="currentColor"
+            strokeWidth="1.2"
+            strokeDasharray="4 4"
+          />
+          <path
+            d="M40 0 V90 L90 140 H200"
+            stroke="currentColor"
+            strokeWidth="1.2"
+          />
+          <circle cx="160" cy="80" r="3" fill="currentColor" />
+        </svg>
+
+        {/* ==================== MOBILE VERTICAL NEON FLOW ==================== */}
+        <div className="absolute inset-0 h-full w-full md:hidden">
+          <svg
+            className="absolute inset-0 h-full w-full"
+            preserveAspectRatio="none"
+          >
+            <defs>
+              <linearGradient
+                id="mobile-neon-gradient"
+                x1="0%"
+                y1="0%"
+                x2="0%"
+                y2="100%"
+              >
+                <stop offset="0%" stopColor="#38bdf8" stopOpacity="0" />
+                <stop offset="50%" stopColor="#38bdf8" stopOpacity="0.9" />
+                <stop offset="100%" stopColor="#818cf8" stopOpacity="0" />
+              </linearGradient>
+              <filter id="mobile-laser-blur">
+                <feGaussianBlur stdDeviation="2.5" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+
+            <path
+              d="M 28 180 L 28 92%"
+              fill="none"
+              stroke="rgba(56, 189, 248, 0.15)"
+              strokeWidth="2"
+            />
+
+            <motion.path
+              d="M 28 180 L 28 92%"
+              fill="none"
+              stroke="url(#mobile-neon-gradient)"
+              strokeWidth="3"
+              strokeDasharray="100 350"
+              filter="url(#mobile-laser-blur)"
+              animate={{ strokeDashoffset: [-450, 0] }}
+              transition={{
+                repeat: Infinity,
+                duration: 3.5,
+                ease: 'linear',
               }}
             />
-          </div>
-
-          {/* Steps grid */}
-          <div className="grid grid-cols-6 gap-4 relative z-10">
-            {steps.map((step, idx) => (
-              <div
-                key={idx}
-                onMouseEnter={() => setActiveStep(idx)}
-                onMouseLeave={() => setActiveStep(-1)}
-                className={`transition-all duration-300 ${
-                  isVisible
-                    ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 translate-y-8'
-                }`}
-                style={{
-                  transitionDelay: isVisible ? `${idx * 100}ms` : '0ms'
-                }}
-              >
-                {/* Step card */}
-                <div
-                  className={`${cardBaseClasses} ${
-                    activeStep === idx
-                      ? 'h-[290px] border-sky-400/40 bg-slate-950/80 -translate-y-2'
-                      : 'border-white/10 hover:-translate-y-1 hover:border-sky-400/20'
-                  }`}
-                  style={
-                    activeStep === idx
-                      ? {
-                          boxShadow:
-                            '0 0 30px rgba(56, 139, 253, 0.3), inset 0 0 30px rgba(56, 139, 253, 0.1)'
-                        }
-                      : {}
-                  }
-                >
-                  {/* Glow effect on hover */}
-                  <div
-                    className={`absolute inset-0 opacity-0 transition-opacity duration-300 ${
-                      activeStep === idx ? 'opacity-100' : 'group-hover:opacity-50'
-                    }`}
-                    style={{
-                      background:
-                        'radial-gradient(circle at center, rgba(56, 139, 253, 0.15), transparent 70%)'
-                    }}
-                  />
-
-                  <div className="relative z-10 flex h-full w-full flex-col items-center justify-center text-center gap-3">
-                    {/* Number circle */}
-                    <div
-                      className={`inline-flex h-12 w-12 items-center justify-center rounded-full font-semibold text-sm transition-all duration-300 ${
-                        activeStep === idx
-                          ? 'bg-sky-500/40 text-sky-200'
-                          : 'bg-sky-500/10 text-sky-400 group-hover:bg-sky-500/20'
-                      }`}
-                      style={
-                        activeStep === idx
-                          ? {
-                              boxShadow: '0 0 20px rgba(56, 139, 253, 0.5)'
-                            }
-                          : {}
-                      }
-                    >
-                      {step.number}
-                    </div>
-
-                    {/* Title */}
-                    <h3 className="text-sm font-semibold text-white leading-tight">
-                      {step.title}
-                    </h3>
-
-                    {/* Description placeholder for alignment */}
-                    <p
-                      className={`text-xs text-slate-300 leading-relaxed max-w-[220px] overflow-hidden transition-all duration-300 ${
-                        activeStep === idx
-                          ? 'opacity-100 max-h-24 mt-2'
-                          : 'opacity-0 max-h-0'
-                      }`}
-                    >
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          </svg>
         </div>
       </div>
 
-      {/* Mobile Vertical Timeline */}
-      <div className="md:hidden space-y-4">
-        {steps.map((step, idx) => (
-         <div
-  key={idx}
-  ref={(el) => {
-    stepRefs.current[idx] = el
-  }}
-  className={`transition-all duration-300 ${
-              isVisible
-                ? 'opacity-100 translate-x-0'
-                : 'opacity-0 -translate-x-8'
-            }`}
-            style={{
-              transitionDelay: isVisible ? `${idx * 100}ms` : '0ms'
-            }}
-          >
-          <div
-  className={`${cardBaseClasses} transition-all duration-500 ${
-    mobileActiveStep === idx
-      ? 'border-sky-400/40 bg-slate-950/90 scale-[1.03]'
-      : 'border-white/10 scale-100'
-  }`}
-  style={
-    mobileActiveStep === idx
-      ? {
-          boxShadow:
-            '0 0 35px rgba(56,139,253,0.25), inset 0 0 20px rgba(56,139,253,0.08)'
-        }
-      : {}
-  }
->
-              {/* Glow effect */}
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-50 transition-opacity duration-300"
-                style={{
-                  background:
-                    'radial-gradient(circle at center, rgba(56, 139, 253, 0.15), transparent 70%)'
-                }}
-              />
+      {/* ==================== CONTENT CONTAINER ==================== */}
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
+        {/* Header Section (With Background Mask to clear text area) */}
+        <div className="relative mx-auto mb-12 flex max-w-3xl flex-col items-center space-y-5 px-4 text-center sm:px-6 md:mb-16">
+          {/* Radial Mask to hide background patterns behind the text */}
+          <div className="pointer-events-none absolute -inset-x-10 -inset-y-6 -z-10 rounded-full bg-[#0a0f1d]/90 blur-xl" />
 
-              <div className="relative z-10 flex h-full w-full flex-col items-center justify-center text-center gap-3">
-                <div
-  className={`inline-flex h-12 w-12 items-center justify-center rounded-full font-semibold text-sm transition-all duration-300 ${
-    mobileActiveStep === idx
-      ? 'bg-sky-500/40 text-sky-200'
-      : 'bg-sky-500/10 text-sky-400'
-  }`}
-  style={
-    mobileActiveStep === idx
-      ? {
-          boxShadow: '0 0 20px rgba(56,139,253,0.5)'
-        }
-      : {}
-  }
->
-                  {step.number}
-                </div>
-                <div className="space-y-2">
-                  <h3 className="text-base font-semibold text-white">
-                    {step.title}
-                  </h3>
-                  <p
-  className={`text-sm text-slate-300 leading-relaxed max-w-[220px] mx-auto overflow-hidden transition-all duration-500 ${
-    mobileActiveStep === idx
-      ? 'max-h-32 opacity-100 mt-3'
-      : 'max-h-0 opacity-0'
-  }`}
->
-  {step.description}
-</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Connector line for mobile */}
-            {idx < steps.length - 1 && (
-              <div
-                className={`h-6 w-0.5 bg-gradient-to-b from-sky-500/50 to-transparent mx-auto transition-all duration-300 ${
-                  isVisible ? 'opacity-100' : 'opacity-0'
-                }`}
-                style={{
-                  transitionDelay: isVisible ? `${(idx + 1) * 100}ms` : '0ms'
-                }}
-              />
-            )}
+          {/* Badge Pill Tag */}
+          <div className="inline-flex items-center gap-2 rounded-full border border-sky-400/20 bg-sky-500/10 px-3 py-1 shadow-[0_0_24px_rgba(56,189,248,0.15)] sm:gap-2.5 sm:px-4 sm:py-1.5">
+            <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75" />
+              <span className="relative inline-flex h-full w-full rounded-full bg-sky-400" />
+            </span>
+            <span className="whitespace-nowrap text-[10px] font-semibold uppercase tracking-[0.15em] text-sky-200 sm:text-xs sm:tracking-[0.25em]">
+              How EMFIS Works
+            </span>
           </div>
-        ))}
+
+          {/* Main Section Heading */}
+          <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
+            EMFIS Workflow
+          </h2>
+
+          {/* Sub-heading Paragraph */}
+          <p className="w-full max-w-md px-2 text-center text-xs leading-relaxed text-slate-400 sm:max-w-xl sm:text-sm md:text-base">
+            From transmission line setup to professional engineering reporting.
+          </p>
+        </div>
+
+        {/* ==================== DESKTOP GRID WITH CSS LASER FLOW TRACKS ==================== */}
+        <div className="relative hidden grid-cols-3 gap-6 md:grid">
+          {/* Track Line 1 (Row Atas: Kad 01 -> 03) */}
+          <div className="pointer-events-none absolute left-[8%] right-[8%] top-[23%] z-0 h-[2px] overflow-hidden bg-sky-500/10">
+            <div className="animate-laser-row1 h-full w-full bg-gradient-to-r from-transparent via-sky-400 to-transparent shadow-[0_0_12px_#38bdf8]" />
+          </div>
+
+          {/* Track Line 2 (Row Bawah: Kad 04 -> 06) */}
+          <div className="pointer-events-none absolute bottom-[23%] left-[8%] right-[8%] z-0 h-[2px] overflow-hidden bg-sky-500/10">
+            <div className="animate-laser-row2 h-full w-full bg-gradient-to-r from-transparent via-sky-400 to-transparent shadow-[0_0_12px_#38bdf8]" />
+          </div>
+
+          {/* Kad 01 - 06 */}
+          {steps.map((step, idx) => (
+            <motion.div
+              key={step.number}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: idx * 0.1, ease: 'easeOut' }}
+              className="group relative z-10 overflow-hidden rounded-2xl border border-slate-800 bg-[#0d1527]/80 p-5 pb-5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-sky-400/50 hover:shadow-[0_0_30px_rgba(56,189,248,0.2)] md:p-6"
+            >
+              {/* Top Neon Line Accent */}
+              <div
+                aria-hidden
+                className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-sky-400/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100"
+              />
+
+              {/* Inline Header: Enlarged Badge (h-9 w-9) + Title */}
+              <div className="mb-3 flex items-center gap-3.5">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-sky-400/20 bg-sky-500/10 text-xs font-semibold text-sky-300">
+                  {step.number}
+                </span>
+                <h3 className="text-base font-semibold text-white">
+                  {step.title}
+                </h3>
+              </div>
+
+              {/* Description */}
+              <p className="text-sm font-normal leading-relaxed text-slate-400">
+                {step.description}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* ==================== MOBILE SINGLE-EXPANSION STACK ==================== */}
+        <div className="relative z-10 mx-auto max-w-sm space-y-5 px-2 md:hidden">
+          {steps.map((step) => (
+            <motion.div
+              key={step.number}
+              initial="initial"
+              whileInView="active"
+              viewport={{ amount: 0.85, margin: '-150px 0px -150px 0px' }}
+              variants={{
+                initial: {
+                  borderColor: 'rgba(30, 41, 59, 1)',
+                  backgroundColor: 'rgba(13, 21, 39, 0.6)',
+                  boxShadow: '0 0 0 rgba(56, 189, 248, 0)',
+                },
+                active: {
+                  borderColor: 'rgba(56, 189, 248, 0.6)',
+                  backgroundColor: 'rgba(13, 21, 39, 0.95)',
+                  boxShadow: '0 0 25px rgba(56, 189, 248, 0.25)',
+                },
+              }}
+              transition={{ duration: 0.3 }}
+              className="relative overflow-hidden rounded-2xl border p-5 backdrop-blur-xl"
+            >
+              <motion.div
+                variants={{
+                  initial: { opacity: 0 },
+                  active: { opacity: 1 },
+                }}
+                transition={{ duration: 0.3 }}
+                className="absolute left-0 right-0 top-0 h-[1.5px] rounded-t-2xl bg-gradient-to-r from-transparent via-sky-400 to-transparent"
+              />
+
+              {/* Inline Header: Enlarged Badge (h-9 w-9) + Title */}
+              <div className="mb-3 flex items-center gap-3.5">
+                <span className="z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-sky-400/20 bg-sky-500/10 text-xs font-semibold text-sky-300">
+                  {step.number}
+                </span>
+                <h3 className="text-base font-semibold text-white">
+                  {step.title}
+                </h3>
+              </div>
+
+              <motion.div
+                variants={{
+                  initial: { opacity: 0, height: 0, marginTop: 0 },
+                  active: { opacity: 1, height: 'auto', marginTop: 12 },
+                }}
+                transition={{ duration: 0.35, ease: 'easeInOut' }}
+                className="overflow-hidden"
+              >
+                <p className="mt-2 text-sm font-normal leading-relaxed text-slate-400">
+                  {step.description}
+                </p>
+              </motion.div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   )
