@@ -109,7 +109,7 @@ export default function Applications() {
               Designed for exact transmission classes
             </h2>
 
-            <p className="mx-auto mt-2 max-w-xl text-xs leading-relaxed text-slate-400 sm:text-sm md:text-base">
+            <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-slate-400 sm:text-sm md:text-base">
               Professional software for electric and magnetic field analysis
               across standard voltage levels.
             </p>

@@ -366,7 +366,7 @@ export default function HeroSection() {
           variants={fadeInUpVariants}
           custom={0.5}
         >
-          <p className="mx-auto mt-2 max-w-xl text-xs leading-relaxed text-slate-400 sm:text-sm md:text-base">
+          <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-slate-400 sm:text-sm md:text-base">
           Your complete engineering toolkit to accurately simulate, analyze and optimize electromagnetic fields.
           </p>
         </motion.div>

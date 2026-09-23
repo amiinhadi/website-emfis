@@ -292,7 +292,7 @@ export default function WorkflowSection() {
           </h2>
 
           {/* Sub-heading Paragraph */}
-          <p className="w-full max-w-md px-2 text-center text-xs leading-relaxed text-slate-400 sm:max-w-xl sm:text-sm md:text-base">
+          <p className="w-full max-w-md px-2 text-center text-sm leading-relaxed text-slate-400 sm:max-w-xl sm:text-sm md:text-base">
             From transmission line setup to professional engineering reporting.
           </p>
         </div>

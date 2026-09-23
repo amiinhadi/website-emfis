@@ -113,7 +113,7 @@ export default function Contact() {
               Contact Our Engineering Team
             </h1>
 
-            <p className="mx-auto max-w-xl text-xs leading-relaxed text-slate-400 sm:text-sm md:text-base">
+            <p className="mx-auto max-w-xl text-sm leading-relaxed text-slate-400 sm:text-sm md:text-base">
               Have questions about EMFIS transmission field calculations or need
               a custom technical demo? Send us a message below.
             </p>
